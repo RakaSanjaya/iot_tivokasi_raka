@@ -1,17 +1,34 @@
 {
   "version": 1,
-  "author": "KAVITH BUDVIN",
+  "author": "Raka Sanjaya",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 86.4, "left": 24.04, "attrs": {} },
-    { "type": "wokwi-dht22", "id": "dht1", "top": 19.5, "left": -91.8, "attrs": {} }
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "ultrasonic-sensor", "id": "ultra1", "top": -100, "left": -100, "rotate": 0 },
+    { "type": "ultrasonic-sensor", "id": "ultra2", "top": -100, "left": 140, "rotate": 0 },
+    { "type": "servo", "id": "servo", "top": 100, "left": -80, "rotate": 90 },
+    { "type": "buzzer", "id": "buzz", "top": 100, "left": 140, "rotate": 0 }
   ],
   "connections": [
-    [ "esp:TX", "$serialMonitor:RX", "", [] ],
-    [ "esp:RX", "$serialMonitor:TX", "", [] ],
-    [ "dht1:VCC", "esp:3V3", "red", [ "v19.2", "h67.2", "v-67.2" ] ],
-    [ "esp:GND.1", "dht1:GND", "black", [ "h0" ] ],
-    [ "dht1:SDA", "esp:27", "green", [ "v0" ] ]
+    ["esp:3V3", "ultra1:VCC", "red", ["v0"]],
+    ["esp:GND", "ultra1:GND", "black", ["v0"]],
+    ["esp:D2", "ultra1:TRIG", "green", ["v0"]],
+    ["esp:D4", "ultra1:ECHO", "green", ["v0"]],
+    
+    ["esp:3V3", "ultra2:VCC", "red", ["v0"]],
+    ["esp:GND", "ultra2:GND", "black", ["v0"]],
+    ["esp:D5", "ultra2:TRIG", "green", ["v0"]],
+    ["esp:D18", "ultra2:ECHO", "green", ["v0"]],
+    
+    ["esp:3V3", "servo:V+", "red", ["v0"]],
+    ["esp:GND", "servo:GND", "black", ["v0"]],
+    ["esp:D15", "servo:PWM", "green", ["v0"]],
+    
+    ["esp:D19", "buzz:1", "green", ["v0"]],
+    ["esp:GND", "buzz:2", "black", ["v0"]],
+    
+    ["esp:TX", "$serialMonitor:RX", "", []],
+    ["esp:RX", "$serialMonitor:TX", "", []]
   ],
   "dependencies": {}
 }
